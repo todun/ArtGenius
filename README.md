@@ -1,0 +1,4 @@
+Art Genius
+========
+
+HackDuke Project
