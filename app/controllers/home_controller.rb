@@ -4,6 +4,7 @@ class HomeController < ApplicationController
       redirect_to :new_user_session
     end
     @users = User.all
+    @images = Image.all
   end
 
   def new
