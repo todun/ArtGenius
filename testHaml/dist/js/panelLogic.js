@@ -21,8 +21,24 @@ logic.highlightedFill = new jsgl.fill.SolidFill();
 logic.highlightedFill.setOpacity(0.3);
 logic.highlightedFill.setColor("yellow");
 
+loadExistingRects();
+
 setHighlightingMode();
 // setDrawingMode();
+
+function loadExistingRects() {
+	for (rect in comments) {
+		var comment = comments[rect];
+		var obj = myPanel.createRectangle();
+		obj.setX(comment.x1);
+		obj.setY(comment.y1);
+		obj.setWidth(comment.x2 - comment.x1);
+		obj.setHeight(comment.y2 - comment.y1);
+		obj.id = comment.id;
+		obj.setFill(logic.placedFill);
+		logic.listOfRects.push(obj);
+	}
+}
 
 function setDrawingMode() {
     for (rect in logic.listOfRects) {
@@ -105,6 +121,7 @@ function updateDimensionsOfRect(rect) {
 
 function drawing_mouseUpListener(e) {
     if (logic.isMousePressed) {
+    	//TODO: this rect needs an id eventually from the server, so do we really need to add it to listOfRects here?
         logic.x1 = logic.curRect.getX();
         logic.y1 = logic.curRect.getY();
         logic.x2 = logic.x1 + logic.curRect.getWidth();
