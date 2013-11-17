@@ -11,10 +11,10 @@
 
 
 
-%p#notice= notice
-%h3= @image.title
-%p= @image.user.email
-%p= @image.comments.length
+-# %p#notice= notice
+-# %h3= @image.title
+-# %p= @image.user.email
+-# %p= @image.comments.length
 
 
 
@@ -37,7 +37,7 @@
 		%p= @image.user.email
 	.row.bottom-spacer
 		.col-sm-8
-			%button{:type=>"button", :onclick => "javascript:toggleMode()"}Toggle
+			%button#modeButton{:type=>"button", :onclick => "javascript:toggleMode()"}Annotate
 			#panel
 				%img#picture{:src => @image.image}
 		.col-sm-3.col-sm-offset-1
