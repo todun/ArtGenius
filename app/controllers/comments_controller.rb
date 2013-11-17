@@ -17,6 +17,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.js {}
       format.json { render json: @comment }
     end
   end
@@ -26,6 +27,12 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
 
+    @comment.x1 = params[:x1]
+    @comment.y1 = params[:y1]
+    @comment.x2 = params[:x2]
+    @comment.y2 = params[:y2]
+    @comment.image_id = params[:img]
+    @comment.user_id = current_user.id
     respond_to do |format|
       format.html # new.html.erb
       format.js { }
@@ -45,7 +52,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to @comment.image}
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }

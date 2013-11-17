@@ -1,58 +1,17 @@
 var panelDiv = document.getElementById("panel");
 var myPanel = new jsgl.Panel(panelDiv);
 
-// var painting = myPanel.createImage();
-// // painting.setUrl('dist/img/starry-night.jpg');
-// //painting.setUrl('../img/small-ball.png');
-// var origWidth = painting.getWidth();
-// var origHeight = painting.getHeight();
-// scaleImage(5);
-// //Image is loaded asynchronously, so scaleImage keeps calling itself every DELAY milliseconds until image is loaded
-// function scaleImage(DELAY) {
-//     window.setTimeout(function () {
-//         origWidth = painting.getWidth();
-//         origHeight = painting.getHeight();
-//         if (origWidth == 0 || origHeight == 0) { //image not yet loaded
-//             scaleImage();
-//             return;
-//         }
-//         //At this point, raw image has been loaded with original dimensions
-
-//         //Find width and height of the div the panel is contained in
-//         panelWidth = panelDiv.style.width;
-//         panelWidth = panelWidth.substring(0, panelWidth.length - 2);
-//         panelWidth = parseInt(panelWidth);
-//         panelHeight = panelDiv.style.height;
-//         panelHeight = panelHeight.substring(0, panelHeight.length - 2);
-//         panelHeight = parseInt(panelHeight);
-
-//         //Determine if the width needs to be shrunk more or the height, but don't expand either dimension
-//         widthScaling = panelWidth / origWidth;
-//         heightScaling = panelHeight / origHeight;
-//         scalingFactor = Math.min(widthScaling, heightScaling);
-//         if (scalingFactor >= 1) {
-//             scalingFactor = 1; // Do not zoom on low quality image
-//         }
-
-//         painting.setWidth(origWidth * scalingFactor);
-//         painting.setHeight(origHeight * scalingFactor);
-
-//         myPanel.addElement(painting);
-
-//     }, DELAY);
-// }
-
 var logic = {
-	x1 : 0,
-	x2 : 0,
-	y1 : 0,
-	y2 : 0,
-	listOfRects : [],
-	curRect : null,
-	isMousePressed : false,
-	drawingFill : null,
-	placedFill : null,
-	highlightedFill : null
+    x1: 0,
+    x2: 0,
+    y1: 0,
+    y2: 0,
+    listOfRects: [],
+    curRect: null,
+    isMousePressed: false,
+    drawingFill: null,
+    placedFill: null,
+    highlightedFill: null
 };
 logic.drawingFill = new jsgl.fill.SolidFill();
 logic.drawingFill.setOpacity(0.5);
@@ -62,25 +21,39 @@ logic.highlightedFill = new jsgl.fill.SolidFill();
 logic.highlightedFill.setOpacity(0.3);
 logic.highlightedFill.setColor("yellow");
 
+loadExistingRects();
 
-//TODO: deal with negative dimensions
+setHighlightingMode();
+// setDrawingMode();
 
-setDrawingMode();
+function loadExistingRects() {
+	for (rect in comments) {
+		var comment = comments[rect];
+		var obj = myPanel.createRectangle();
+		obj.setX(comment.x1);
+		obj.setY(comment.y1);
+		obj.setWidth(comment.x2 - comment.x1);
+		obj.setHeight(comment.y2 - comment.y1);
+		obj.id = comment.id;
+		obj.setFill(logic.placedFill);
+		logic.listOfRects.push(obj);
+	}
+}
 
 function setDrawingMode() {
-	for (rect in logic.listOfRects) {
-		removeHighlightingListenersFromElement(logic.listOfRects[rect]);
-		addDrawingListenersToElement(logic.listOfRects[rect]); //allows user to overlap other rectangles when drawing
-	}
-	addDrawingListenersToElement(myPanel);
+    for (rect in logic.listOfRects) {
+        removeHighlightingListenersFromElement(logic.listOfRects[rect]);
+        addDrawingListenersToElement(logic.listOfRects[rect]); //allows user to overlap other rectangles when drawing
+    }
+    addDrawingListenersToElement(myPanel);
 }
 
 function setHighlightingMode() {
-	removeDrawingListenersFromElement(myPanel);
-	for (rect in logic.listOfRects) {
-		addHighlightingListenersToElement(logic.listOfRects[rect]); //each rect will highlight when hovered over
-		removeDrawingListenersFromElement(logic.listOfRects[rect]);
-	}
+    removeDrawingListenersFromElement(myPanel);
+    for (rect in logic.listOfRects) {
+        addHighlightingListenersToElement(logic.listOfRects[rect]); //each rect will highlight when hovered over
+        removeDrawingListenersFromElement(logic.listOfRects[rect]);
+    }
 }
 
 function addDrawingListenersToElement(elem) {
@@ -96,8 +69,7 @@ function removeDrawingListenersFromElement(elem) {
 }
 
 function addHighlightingListenersToElement(elem) {
-	console.log(elem);
-    elem.addMouseOverListener(highlightedListener);  //highlights on hover
+    elem.addMouseOverListener(highlightedListener); //highlights on hover
     elem.addMouseOutListener(unhighlightedListener); //unhighlights when no longer hovering
 }
 
@@ -107,12 +79,12 @@ function removeHighlightingListenersFromElement(elem) {
 }
 
 function highlightedListener(e) {
-	var rect = e.getSourceElement();
+    var rect = e.getSourceElement();
     rect.setFill(logic.highlightedFill);
 }
 
 function unhighlightedListener(e) {
-	var rect = e.getSourceElement();
+    var rect = e.getSourceElement();
     rect.setFill(logic.placedFill);
 }
 
@@ -132,18 +104,40 @@ function drawing_mouseMoveListener(e) {
     if (logic.isMousePressed) {
         logic.x2 = e.getX();
         logic.y2 = e.getY();
-        logic.curRect.setWidth(logic.x2 - logic.x1);
-        logic.curRect.setHeight(logic.y2 - logic.y1);
+        updateDimensionsOfRect(logic.curRect);
     }
+}
+
+function updateDimensionsOfRect(rect) {
+    var xLoc = logic.x1 < logic.x2 ? logic.x1 : logic.x2;
+    var yLoc = logic.y1 < logic.y2 ? logic.y1 : logic.y2;
+    var width = Math.abs(logic.x2 - logic.x1);
+    var height = Math.abs(logic.y2 - logic.y1);
+    rect.setX(xLoc);
+    rect.setY(yLoc);
+    rect.setWidth(width);
+    rect.setHeight(height);
 }
 
 function drawing_mouseUpListener(e) {
     if (logic.isMousePressed) {
-		// document.getElementById("form").innerText = logic.x1 + ", " + logic.y1;
+    	//TODO: this rect needs an id eventually from the server, so do we really need to add it to listOfRects here?
+        logic.x1 = logic.curRect.getX();
+        logic.y1 = logic.curRect.getY();
+        logic.x2 = logic.x1 + logic.curRect.getWidth();
+        logic.y2 = logic.y1 + logic.curRect.getHeight();
         logic.curRect.setFill(logic.placedFill); //change the fill when placed
         logic.listOfRects.push(logic.curRect); //add to list of placed rects
-
         setHighlightingMode(); //only drawing a single rect while in drawing mode. then switch back to highlighting mode
+
+        console.log(logic.x1);
+        console.log(logic.y1);
+        console.log(logic.x2);
+        console.log(logic.y2);
+        var imageId = getImageId();
+        var redir = window.location.origin + "/comments/new?x1=" + logic.x1 + "&x2=" + logic.x2 + "&y1=" + logic.y1 + "&y2=" + logic.y2 + "&img=" + imageId;
+        $.get("/comments/new.js", function (data) {});
+
     }
     logic.isMousePressed = false;
 }
