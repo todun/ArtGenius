@@ -1,3 +1,6 @@
+:javascript 
+  var comments = #{@image.comments.to_json}
+
 #panel
   %p#notice= notice
   %h3= @image.title
@@ -6,3 +9,4 @@
   = link_to 'Edit', edit_image_path(@image)
   \|
   = link_to 'Back', images_path
+#side

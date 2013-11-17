@@ -1,3 +1,21 @@
+:javascript
+  var user_id = #{current_user.id}
+  var x1 = getParameterByName("x1");
+  var x2 = getParameterByName("x2");
+  var y1 = getParameterByName("y1");
+  var y2 = getParameterByName("y2");
+  var imageId = getParameterByName("img");
+
+  console.log(user_id);
+  $(document).ready(function(){
+    $("#comment_x1")[0].value = x1;
+    $("#comment_x2")[0].value = x2; 
+    $("#comment_y1")[0].value = y1; 
+    $("#comment_y2")[0].value = y2;
+    $("#comment_user_id")[0].value = user_id;
+    $("#comment_image_id")[0].value = imageId;
+  });
+
 %h1 New comment
 
 = render 'form'

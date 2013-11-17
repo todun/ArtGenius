@@ -1,5 +1,18 @@
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function getImageId(){
+  var id = parseInt(window.location.pathname.split("/")[2]);
+  return id;
+}
+
 $(document).ready(function() {
 var panelDiv = document.getElementById("panel");
+if(!panelDiv){return;}
 console.log(panelDiv);
 var myPanel = new jsgl.Panel(panelDiv);
 /*
@@ -100,9 +113,20 @@ function mouseUpListener(e) {
     console.log(y1);
     console.log(x2);
     console.log(y2);
-    var redir = window.location.origin+"/comments/new?x1="+x1+"x2="+x2+"y1="+y1+"y2="+y2
-    window.location.replace(redir);
+    var imageId = getImageId();
+    var redir = window.location.origin+"/comments/new?x1="+x1+"&x2="+x2+"&y1="+y1+"&y2="+y2+"&img="+imageId;
+    $.get("/comments/new.js", function(data){
+    });
+    //window.location.replace(redir);
 	}
 	isMousePressed = false;
 }
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 });
