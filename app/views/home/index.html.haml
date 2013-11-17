@@ -1,5 +1,5 @@
 %h3 Home
-- @users.each do |user|
-  %p
-  User: #{user.email}
+- @images.each do |image|
+  .col-sm-3.tile
+    %img{:src => image.image}
 = link_to "sign out", destroy_user_session_path, method: :delete
