@@ -10,37 +10,37 @@
 				%span.icon-bar
 		.navbar-collapse.collapse
 			= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-				.row
-					.col-sm-3
+				.row.right
+					.col-sm-5
+					.col-sm-3.white
 						= f.label :email
 						%br/
 						= f.email_field :email
-					.col-sm-3
+					.col-sm-3.white.260
 						= f.label :password
 						%br/
 						= f.password_field :password
 					- if devise_mapping.rememberable?
-						.col-sm-3
-							= f.check_box :remember_me
-							= f.label :remember_me
-							%br
-							= f.submit "Sign in"
-			= render "devise/shared/links"
+						.col-sm-1.white
+							= f.submit "Sign in", :class => "btn btn-info"
 
 
 
-.jumbotron
-	.container.center
-		%h1#header-main Art Genius
-		
-		.container.spacer
-			%p An Art History lesson whenever you want
-			.row.spacer
-				.col-sm-4
-				.col-sm-2
-					%a.btn.btn-outline-inverse.btn-lg{role: "button"} Sign Up!
-				.col-sm-2
-					%a.btn.btn-outline-inverse.btn-lg{role: "button"} Log In!
-				.col-sm-4
+
+								
+
+
+
+.all
+	.jumbotron
+		.container.center
+			%h1#header-main Art Genius
+			.container.spacer
+				%p An Art History lesson whenever you want
+				.row.spacer
+					.col-sm-5
+					.col-sm-2
+						%a.btn.btn-outline-inverse.btn-lg{role: "button"} Sign Up!
+					.col-sm-5
 		
 

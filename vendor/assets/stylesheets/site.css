@@ -7,6 +7,10 @@ body {
   width: 100%;
 }
 
+.border{
+	border:5px solid black;
+}
+
 .tile{
 	padding-top: 15px;
 	width: 350px;
@@ -25,7 +29,7 @@ body {
 	opacity: .7;
 	-webkit-transition: -webkit-filter .5s;
 	transition: -webkit-filter, opacity .5s;
-	border:5px solid black;
+	
 }
 
 .tile img:hover{
@@ -60,7 +64,9 @@ body {
 	margin-bottom: 0em;
 	padding-top: 4em;
 	padding-bottom: 4em;
-	height: 580px;
+	height: 100%;
+	width: 100%;
+	position: absolute;
 	color: #fff;
 	font-weight: 100px;
 }
@@ -132,4 +138,24 @@ a.navbar-brand{
 
 .pad-left{
 	padding-left: 30px;
+}
+
+#comment_box{
+	height: 200px;
+	width: 350px;
+}
+
+.white{
+	color: white;
+}
+.260{
+	width: 260px;
+}
+
+.navbar {
+	height: 60px;
+}
+
+a.navbar-brand{
+	z-index: 1000;
 }

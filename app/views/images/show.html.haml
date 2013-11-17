@@ -5,19 +5,15 @@
 		var height = image.height
 		var comment = document.getElementById("comment");
 		comment.height = height/2 + "px";
+
+		var save = document.getElementById("save-button");
+		if(save) {
+			save.className = 'button.btn.btn-info';
+		}
+
 	})
 
-
-
-
-
 %p#notice= notice
-%h3= @image.title
-%p= @image.user.email
-%p= @image.comments.length
-
-
-
 
 .navbar.navbar-inverse.navbar-fixed-top#blue-nav{role: "navigation"}
 	.container
@@ -33,17 +29,23 @@
 				.glyphicon.glyphicon-star Star
 .container
 	.row.spacer-mini
-		%h3= @image.title
-		%p= @image.user.email
+		.col-sm-12
+			%h3= @image.title
+			%h4 Artist:
+			%h4 Year:
+			
 	.row.bottom-spacer
 		.col-sm-8
-			%button{:type=>"button", :onclick => "javascript:toggleMode()"}Toggle
+			
 			#panel
 				%img#picture{:src => @image.image}
 		.col-sm-4.pad-left
 			#comment.row
+				%button.btn.btn-info{:type=>"button", :onclick => "javascript:toggleMode()"}Add a comment
+
+				%p Last Author: #{@image.user.email}
 				#side
 			.row
+				
 				%h4 Description:
-				%h4 Artist:
-				%h4 Year:
+				

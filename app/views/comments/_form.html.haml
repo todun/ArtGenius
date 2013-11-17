@@ -1,3 +1,6 @@
+
+
+
 = form_for @comment do |f|
   - if @comment.errors.any?
     #error_explanation
@@ -19,6 +22,6 @@
   .field
     = f.hidden_field :image_id
   .field
-    = f.text_area :text
+    = f.text_area :text, :id => 'comment_box'
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', :id => 'save_botton'
