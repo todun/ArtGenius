@@ -1,10 +1,11 @@
 :javascript 
   var comments = #{@image.comments.to_json}
 
-#panel
-  %p#notice= notice
-  %h3= @image.title
-  %p= @image.user.email
-  %p= @image.comments.length
+%p#notice= notice
+%h3= @image.title
+%p= @image.user.email
+%p= @image.comments.length
+%button{:type=>"button", :onclick => "javascript:toggleMode()"}Toggle
+#panel{ :style => "width: 800px; height: 500px;" }
   %img{:src => @image.image}
 #side

@@ -1,3 +1,4 @@
+var isDrawing = false;
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -10,6 +11,7 @@ function getImageId() {
     return id;
 }
 
+var toggleMode = null;
 $(document).ready(function () {
     var panelDiv = document.getElementById("panel");
     var myPanel = new jsgl.Panel(panelDiv);
@@ -19,6 +21,7 @@ $(document).ready(function () {
         x2: 0,
         y1: 0,
         y2: 0,
+        mode: null,
         listOfRects: [],
         curRect: null,
         isMousePressed: false,
@@ -50,11 +53,22 @@ $(document).ready(function () {
             obj.id = comment.id;
             obj.setFill(logic.placedFill);
             logic.listOfRects.push(obj);
-            myPanel.addElement(obj);
+            myPanel.addElement(obj)
         }
     }
 
+    toggleMode = function() {
+      if(isDrawing){
+        setHighlightingMode();
+      } else {
+        setDrawingMode();
+      }
+      isDrawing = !isDrawing;
+    }
+    
     function setDrawingMode() {
+      console.log("drawing");
+        logic.mode = "drawing";
         for (rect in logic.listOfRects) {
             removeHighlightingListenersFromElement(logic.listOfRects[rect]);
             addDrawingListenersToElement(logic.listOfRects[rect]); //allows user to overlap other rectangles when drawing
@@ -63,6 +77,8 @@ $(document).ready(function () {
     }
 
     function setHighlightingMode() {
+      console.log("highlighting");
+        logic.mode = "highlighting";
         removeDrawingListenersFromElement(myPanel);
         for (rect in logic.listOfRects) {
             addHighlightingListenersToElement(logic.listOfRects[rect]); //each rect will highlight when hovered over
@@ -95,6 +111,9 @@ $(document).ready(function () {
     function highlightedListener(e) {
         var rect = e.getSourceElement();
         rect.setFill(logic.highlightedFill);
+        var id = rect.id;
+        $.get("/comments/"+id+".js",function(data){
+        });
     }
 
     function unhighlightedListener(e) {
@@ -150,7 +169,7 @@ $(document).ready(function () {
             console.log(logic.y2);
             var imageId = getImageId();
             var redir = window.location.origin + "/comments/new?x1=" + logic.x1 + "&x2=" + logic.x2 + "&y1=" + logic.y1 + "&y2=" + logic.y2 + "&img=" + imageId;
-            $.get("/comments/new.js", function (data) {});
+            $.get("/comments/new.js?x1="+ logic.x1 + "&x2=" + logic.x2 + "&y1=" + logic.y1 + "&y2=" + logic.y2 + "&img=" + imageId+"", function (data) {});
 
         }
         logic.isMousePressed = false;
