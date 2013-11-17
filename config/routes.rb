@@ -1,4 +1,7 @@
 ArtGenius::Application.routes.draw do
+  resources :comments
+
+
   get "home/index"
 
   devise_for :users , :controllers => { :sessions =>'users'}
@@ -9,6 +12,7 @@ ArtGenius::Application.routes.draw do
   root :to => "home#index"
 
   resources :images
+  resources :comments
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
