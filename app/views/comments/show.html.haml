@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b X1:
+  = @comment.x1
+%p
+  %b X2:
+  = @comment.x2
+%p
+  %b Y1:
+  = @comment.y1
+%p
+  %b Y2:
+  = @comment.y2
+%p
+  %b User:
+  = @comment.user_id
+%p
+  %b Text:
+  = @comment.text
+
+= link_to 'Edit', edit_comment_path(@comment)
+\|
+= link_to 'Back', comments_path
