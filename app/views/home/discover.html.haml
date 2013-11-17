@@ -1,3 +1,12 @@
+:javascript 
+	$(document).ready(function(){
+		var image = document.getElementById("picture");
+		var height = image.height
+		var comment = document.getElementById("comment");
+		comment.height = height/2 + "px";
+	})
+
+
 .navbar.navbar-inverse.navbar-fixed-top#blue-nav{role: "navigation"}
 	.container
 		.navbar-header
@@ -6,7 +15,7 @@
 				%span.icon-bar
 				%span.icon-bar
 				%span.icon-bar
-			%a.navbar-brand{href: "#"} Art Genius
+			%a.navbar-brand{href: "/"} Art Genius
 		.navbar-collapse.collapse
 			.navbar-right
 				sadfasdfdsfs
@@ -14,9 +23,10 @@
 	
 	.row
 		%h3.lobster-header Discover
+		.glyphicon.glyphicon-globe
 	.row.spacer-mini
 		- @images.each do |image|
-			.col-sm-3.tile
-				%img{:src => image.image}
+			.col-sm-4.tile
+				= link_to(image_tag(image.image), image)
 
 = link_to "sign out", destroy_user_session_path, method: :delete

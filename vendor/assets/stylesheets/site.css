@@ -9,14 +9,11 @@ body {
 
 .tile{
 	padding-top: 15px;
-	width: 275px;
-	height: 200px;
+	width: 350px;
+	height: 270px;
 	overflow: hidden;
 	position: relative;
 }
-
-
-
 
 .tile img{
 	position:absolute;
@@ -28,6 +25,7 @@ body {
 	opacity: .7;
 	-webkit-transition: -webkit-filter .5s;
 	transition: -webkit-filter, opacity .5s;
+	border:5px solid black;
 }
 
 .tile img:hover{
@@ -130,4 +128,8 @@ a.navbar-brand{
 	position:absolute;
 	top:-20px;
 	left:-55px;
-	}
+}
+
+.pad-left{
+	padding-left: 30px;
+}
