@@ -1,4 +1,3 @@
-var isDrawing = false;
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -11,7 +10,9 @@ function getImageId() {
     return id;
 }
 
-var toggleMode = null;
+var isDrawing = false;
+var toggleMode = null; //is defined below
+
 $(document).ready(function () {
     var panelDiv = document.getElementById("panel");
     var myPanel = new jsgl.Panel(panelDiv);
@@ -125,7 +126,12 @@ $(document).ready(function () {
         logic.isMousePressed = true;
         logic.x1 = e.getX();
         logic.y1 = e.getY();
-        logic.curRect = myPanel.createRectangle();
+	    if (!logic.curRect) {
+	    	logic.curRect = myPanel.createRectangle();
+	    } else {
+	    	logic.curRect.setWidth(0);
+	    	logic.curRect.setHeight(0);
+	    }
         addDrawingListenersToElement(logic.curRect);
         logic.curRect.setX(logic.x1);
         logic.curRect.setY(logic.y1);
@@ -154,21 +160,21 @@ $(document).ready(function () {
 
     function drawing_mouseUpListener(e) {
         if (logic.isMousePressed) {
-            //TODO: this rect needs an id eventually from the server, so do we really need to add it to listOfRects here?
             logic.x1 = logic.curRect.getX();
             logic.y1 = logic.curRect.getY();
             logic.x2 = logic.x1 + logic.curRect.getWidth();
             logic.y2 = logic.y1 + logic.curRect.getHeight();
             logic.curRect.setFill(logic.placedFill); //change the fill when placed
-            logic.listOfRects.push(logic.curRect); //add to list of placed rects
-            setHighlightingMode(); //only drawing a single rect while in drawing mode. then switch back to highlighting mode
+
+            // logic.listOfRects.push(logic.curRect); //add to list of placed rects
+            // setHighlightingMode(); //only drawing a single rect while in drawing mode. then switch back to highlighting mode
 
             console.log(logic.x1);
             console.log(logic.y1);
             console.log(logic.x2);
             console.log(logic.y2);
             var imageId = getImageId();
-            var redir = window.location.origin + "/comments/new?x1=" + logic.x1 + "&x2=" + logic.x2 + "&y1=" + logic.y1 + "&y2=" + logic.y2 + "&img=" + imageId;
+            // var redir = window.location.origin + "/comments/new?x1=" + logic.x1 + "&x2=" + logic.x2 + "&y1=" + logic.y1 + "&y2=" + logic.y2 + "&img=" + imageId;
             $.get("/comments/new.js?x1="+ logic.x1 + "&x2=" + logic.x2 + "&y1=" + logic.y1 + "&y2=" + logic.y2 + "&img=" + imageId+"", function (data) {});
 
         }
