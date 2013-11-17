@@ -21,6 +21,8 @@ body {
 
 .tile img{
 	position:absolute;
+	width: 350px;
+	height: 270px;
 	top:-5px;
 	left:-20px;
 	margin-top: 2em;
@@ -158,4 +160,8 @@ a.navbar-brand{
 
 a.navbar-brand{
 	z-index: 1000;
+}
+
+.btn-info{
+	color: white;
 }

@@ -18,13 +18,13 @@
 			%a.navbar-brand Art Genius
 		.navbar-collapse.collapse
 			.navbar-right
-				= link_to "sign out", destroy_user_session_path, method: :delete
+				.a= link_to "sign out", destroy_user_session_path, method: :delete, :class => "btn btn-info white"
+
 .container.spacer
 	
 	.row
 		%h3.lobster-header Discover
-		.glyphicon.glyphicon-globe
-	.row.spacer-mini
+	.row
 		- @images.each do |image|
 			.col-sm-4
 				.tile

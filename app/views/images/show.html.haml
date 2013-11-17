@@ -31,24 +31,19 @@
 			.navbar-right
 				.glyphicon.glyphicon-star Star
 .container
-	.row.spacer-mini
+	.row.spacer
 		.col-sm-12
-			%h3= @image.title
-			%h4 Artist:
-			%h4 Year:
+			%h4= @image.title
+			%h5 Artist:
+			%h5 Year:
 			
 	.row.bottom-spacer
 		.col-sm-8
-<<<<<<< HEAD
-			
-=======
-			%button#modeButton{:type=>"button", :onclick => "javascript:toggleMode()"}Annotate
->>>>>>> 08ccc4d5aa7f6318f459993334e2235bb5e724d1
 			#panel
 				%img#picture{:src => @image.image}
 		.col-sm-4.pad-left
 			#comment.row
-				%button.btn.btn-info{:type=>"button", :onclick => "javascript:toggleMode()"}Add a comment
+				%button.btn.btn-info{:type=>"button", :onclick => "javascript:toggleMode()"}Annotate
 
 				%p Last Author: #{@image.user.email}
 				#side
