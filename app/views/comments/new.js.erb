@@ -1,0 +1,3 @@
+console.log("inside erb");
+$("#side").append("<%= escape_javascript("#{render :partial => 'comments/form', :locals => { :comment => @comment }}").html_safe %>");
+

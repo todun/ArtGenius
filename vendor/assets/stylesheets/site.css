@@ -1,0 +1,104 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+ @font-face { font-family: Lobster; src: url('Lobster.otf'); } 
+
+body {
+  padding-top: 50px;
+
+}
+
+
+body.background{
+	background-color: #1681f9;
+}
+
+
+.tile{
+	padding-top: 15px;
+	width: 275px;
+	height: 200px;
+	overflow: hidden;
+	position: relative;
+}
+
+.tile img{
+	position:absolute;
+	top:-5px;
+	left:-20px;
+	margin-top: 2em;
+}
+
+.site-footer{
+	background-color: orange;
+}
+
+#header-main{
+	font-size: 160px;
+	color: #fff;
+	text-shadow: 0 1px 3px #327FCD;
+	text-align: center;
+	font-family: Lobster;
+}
+
+.center{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.jumbotron {
+	//background-color: #1681f9;
+	//background-color: #3cd428;
+	//background-color: #3b88c3;
+	background-color: rgba(22, 129, 249, 0.75);
+	margin-top: 0em;
+	margin-bottom: 0em;
+	padding-top: 4em;
+	padding-bottom: 4em;
+	height: 580px;
+	color: #fff;
+	font-weight: 100px;
+}
+
+.container p {
+	font-size: 1em;
+}
+
+.btn-outline-inverse {
+color: #fff;
+background-color: transparent;
+border-color: #fff;
+}
+
+.spacer{
+margin-top: 60px;
+}
+
+.spacer-mini{
+margin-top: 30px;
+}
+
+#blue-nav{
+	//background-color: rgba(0, 136, 204, 0.7);
+	//background-color: rgba(22, 129, 249, 0.9);
+	background-color: rgba(37, 126, 204, 0.9);
+	border-bottom: .75em solid #08c;
+}
+
+.lobster-header{
+	font-size: 3em;
+	font-family: Lobster;
+}
+
+a.navbar-brand{
+	font-family: Lobster;
+	color: #fff;
+	font-size: 2.5em;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #fff;
+}
+
+#collage{
+	background-image: url('homeCollage.jpg');
+}
