@@ -38,6 +38,7 @@ $(document).ready(function () {
 
 	logic.placedFill = new jsgl.fill.SolidFill();
 	logic.placedFill.setOpacity(0);
+    // logic.placedFill.setColor("gray");
 
 	logic.placedStroke = new jsgl.stroke.SolidStroke();
 	logic.placedStroke.setOpacity(0);

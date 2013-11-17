@@ -1,22 +1,14 @@
-:javascript 
-	$(document).ready(function(){
-		$('#homeLink').click(function() {
-			window.location.href = "#{root_url}";
-		});
-	});
-
-
 
 .navbar.navbar-inverse.navbar-fixed-top#blue-nav{role: "navigation"}
 	.container
-		.navbar-header#homeLink{:onclick => "function(){window.location.href='#{root_url}'};", :style =>  "display:block"}
+		.navbar-header
 			%button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
 				%span.sr-only Toggle navigation
 				%span.icon-bar
 				%span.icon-bar
 				%span.icon-bar
-			%a.navbar-brand Art Genius
 		.navbar-collapse.collapse
+			%a.navbar-brand{:href => root_url} Art Genius
 			.navbar-right
 				.a= link_to "Sign out", destroy_user_session_path, method: :delete, :class => "btn btn-info white"
 

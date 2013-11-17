@@ -1,22 +1,10 @@
-:javascript 
-	var comments = #{@image.comments.to_json}
-	$(document).ready(function(){
-		var image = document.getElementById("picture");
-		var height = image.height
-		var comment = document.getElementById("comment");
-		comment.height = height/2 + "px";
-
-		var save = document.getElementById("save-button");
-		if(save) {
-			save.className = 'button.btn.btn-info';
-		}
-
-	})
 
 -# %p#notice= notice
 -# %h3= @image.title
 -# %p= @image.user.email
 -# %p= @image.comments.length
+:javascript
+	var comments = #{@image.comments.to_json};
 
 .navbar.navbar-inverse.navbar-fixed-top#blue-nav{role: "navigation"}
 	.container
@@ -26,8 +14,8 @@
 				%span.icon-bar
 				%span.icon-bar
 				%span.icon-bar
-			%a.navbar-brand{:href => root_url} Art Genius
 		.navbar-collapse.collapse
+			%a.navbar-brand{:href => root_url} Art Genius
 			.navbar-right
 				.a= link_to "sign out", destroy_user_session_path, method: :delete, :class => "btn btn-info white"
 .container
