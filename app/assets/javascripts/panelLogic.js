@@ -50,6 +50,7 @@ $(document).ready(function () {
             obj.id = comment.id;
             obj.setFill(logic.placedFill);
             logic.listOfRects.push(obj);
+            myPanel.addElement(obj);
         }
     }
 

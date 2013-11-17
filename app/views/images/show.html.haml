@@ -5,8 +5,6 @@
   %p#notice= notice
   %h3= @image.title
   %p= @image.user.email
+  %p= @image.comments.length
   %img{:src => @image.image}
-  = link_to 'Edit', edit_image_path(@image)
-  \|
-  = link_to 'Back', images_path
 #side
