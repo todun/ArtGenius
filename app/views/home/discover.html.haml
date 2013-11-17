@@ -1,1 +1,22 @@
-%h1 DISCOVER
+.navbar.navbar-inverse.navbar-fixed-top#blue-nav{role: "navigation"}
+	.container
+		.navbar-header
+			%button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+				%span.sr-only Toggle navigation
+				%span.icon-bar
+				%span.icon-bar
+				%span.icon-bar
+			%a.navbar-brand{href: "#"} Art Genius
+		.navbar-collapse.collapse
+			.navbar-right
+				sadfasdfdsfs
+.container.spacer
+	
+	.row
+		%h3.lobster-header Discover
+	.row.spacer-mini
+		- @images.each do |image|
+			.col-sm-3.tile
+				%img{:src => image.image}
+
+= link_to "sign out", destroy_user_session_path, method: :delete
