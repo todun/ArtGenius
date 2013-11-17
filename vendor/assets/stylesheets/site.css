@@ -165,3 +165,11 @@ a.navbar-brand{
 .btn-info{
 	color: white;
 }
+
+#sign{
+	text-align: right;
+	position: fixed;
+	top: 150px;
+	right: 10px;
+	z-index: 50;
+}

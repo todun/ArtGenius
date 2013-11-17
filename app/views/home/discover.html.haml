@@ -18,7 +18,9 @@
 			%a.navbar-brand Art Genius
 		.navbar-collapse.collapse
 			.navbar-right
-				.a= link_to "sign out", destroy_user_session_path, method: :delete, :class => "btn btn-info white"
+				.a= link_to "Sign out", destroy_user_session_path, method: :delete, :class => "btn btn-info white"
+
+%a.btn.btn-success.btn-lg#sign{role: "button", :href => new_image_url, :style => "color:white" } Add New Image
 
 .container.spacer
 	
