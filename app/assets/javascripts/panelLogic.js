@@ -44,7 +44,7 @@ $(document).ready(function () {
 
 	logic.highlightedFill = new jsgl.fill.SolidFill();
 	logic.highlightedFill.setOpacity(0.2);
-	logic.highlightedFill.setColor("gray");
+	logic.highlightedFill.setColor("yellow");
 
 	logic.highlightedStroke = new jsgl.stroke.SolidStroke();
 	logic.highlightedStroke.setOpacity(0);
