@@ -1,14 +1,14 @@
-panelDiv = document.getElementById("panel");
-myPanel = new jsgl.Panel(panelDiv);
+var panelDiv = document.getElementById("panel");
+var myPanel = new jsgl.Panel(panelDiv);
 
-painting = myPanel.createImage();
+var painting = myPanel.createImage();
 painting.setUrl('dist/img/starry-night.jpg');
 //painting.setUrl('../img/small-ball.png');
-origWidth = painting.getWidth();
-origHeight = painting.getHeight();
+var origWidth = painting.getWidth();
+var origHeight = painting.getHeight();
 scaleImage(5);
-//Image is loaded asynchronously, so scaleImage keeps calling itself every DELTA milliseconds until image is loaded
-function scaleImage(DELTA) {
+//Image is loaded asynchronously, so scaleImage keeps calling itself every DELAY milliseconds until image is loaded
+function scaleImage(DELAY) {
   window.setTimeout(function() {
 	  origWidth = painting.getWidth();
 	  origHeight = painting.getHeight();
@@ -39,14 +39,27 @@ function scaleImage(DELTA) {
 		  
 	  myPanel.addElement(painting);
 	  
-  }, DELTA);
+  }, DELAY);
 }
 var x1, y1;
+var listOfRects = [];
 var rect;
 var isMousePressed = false;
+var drawingFill = new jsgl.fill.SolidFill();
+drawingFill.setOpacity(0.5);
+var placedFill = new jsgl.fill.SolidFill();
+placedFill.setOpacity(0.3);
+var highlightedFill = new jsgl.fill.SolidFill();
+highlightedFill.setOpacity(0.3);
+highlightedFill.setColor("yellow");
+
 //TODO: deal with negative dimensions
 
 addListenersToElement(painting);
+
+function highlightedListener(e) {
+	e.getSourceElement().setFill(highlightedFill);
+}
 
 function addListenersToElement(elem) {
 	elem.addMouseDownListener(mouseDownListener);
@@ -61,9 +74,7 @@ function mouseDownListener(e) {
 	addListenersToElement(rect);
 	rect.setX(x1);
 	rect.setY(y1);
-	fill = new jsgl.fill.SolidFill();
-	fill.setOpacity(0.4);
-	rect.setFill(fill);
+	rect.setFill(drawingFill);
 	myPanel.addElement(rect);
 }
 
@@ -77,5 +88,11 @@ function mouseMoveListener(e) {
 }
 
 function mouseUpListener(e) {
+	if (isMousePressed) {
+		rect.setFill(placedFill);
+		listOfRects.push(rect);
+		rect.removeMouseDownListener(mouseDownListener);
+		rect.addMouseDownListener(highlightedListener);
+	}
 	isMousePressed = false;
 }
