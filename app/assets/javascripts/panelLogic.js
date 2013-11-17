@@ -125,6 +125,7 @@ $(document).ready(function () {
 	    var rect = e.getSourceElement();
 	    rect.setFill(logic.highlightedFill);
 	    rect.setStroke(logic.highlightedStroke);
+        $.get("/comments/"+rect.id+".js",function(data){});
 	}
 
 	function unhighlightedListener(e) {
