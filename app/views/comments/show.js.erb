@@ -1,4 +1,5 @@
 console.log("inside erb");
+$("#comment h3").html("Comment:");
 $("#side").empty();
 $("#side").append("<%= escape_javascript("#{render :partial => 'comments/comment', :locals => { :comment => @comment }}").html_safe %>");
 
