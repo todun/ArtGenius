@@ -100,6 +100,8 @@ function mouseUpListener(e) {
     console.log(y1);
     console.log(x2);
     console.log(y2);
+    var redir = window.location.origin+"/comments/new?x1="+x1+"x2="+x2+"y1="+y1+"y2="+y2
+    window.location.replace(redir);
 	}
 	isMousePressed = false;
 }
