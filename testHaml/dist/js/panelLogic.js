@@ -132,13 +132,27 @@ function drawing_mouseMoveListener(e) {
     if (logic.isMousePressed) {
         logic.x2 = e.getX();
         logic.y2 = e.getY();
-        logic.curRect.setWidth(logic.x2 - logic.x1);
-        logic.curRect.setHeight(logic.y2 - logic.y1);
+        updateDimensionsOfRect(logic.curRect);
     }
+}
+
+function updateDimensionsOfRect(rect) {
+	var xLoc = logic.x1 < logic.x2 ? logic.x1 : logic.x2;
+	var yLoc = logic.y1 < logic.y2 ? logic.y1 : logic.y2;
+	var width = Math.abs(logic.x2 - logic.x1);
+	var height = Math.abs(logic.y2 - logic.y1);
+	rect.setX(xLoc);
+	rect.setY(yLoc);
+    rect.setWidth(width);
+    rect.setHeight(height);
 }
 
 function drawing_mouseUpListener(e) {
     if (logic.isMousePressed) {
+    	logic.x1 = logic.curRect.getX();
+    	logic.y1 = logic.curRect.getY();
+    	logic.x2 = logic.x1 + logic.curRect.getWidth();
+    	logic.y2 = logic.y1 + logic.curRect.getHeight();
 		// document.getElementById("form").innerText = logic.x1 + ", " + logic.y1;
         logic.curRect.setFill(logic.placedFill); //change the fill when placed
         logic.listOfRects.push(logic.curRect); //add to list of placed rects
