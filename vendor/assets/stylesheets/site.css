@@ -15,11 +15,24 @@ body {
 	position: relative;
 }
 
+
+
+
 .tile img{
 	position:absolute;
 	top:-5px;
 	left:-20px;
 	margin-top: 2em;
+
+	-webkit-filter: grayscale(100%);
+	opacity: .7;
+	-webkit-transition: -webkit-filter .5s;
+	transition: -webkit-filter, opacity .5s;
+}
+
+.tile img:hover{
+	-webkit-filter: grayscale(0%);
+	opacity:1;	
 }
 
 .site-footer{
@@ -96,11 +109,6 @@ a.navbar-brand{
 
 #collage{
 	background-image: url('homeCollage.jpg');
-}
-
-
-#panel{
-
 }
 
 
