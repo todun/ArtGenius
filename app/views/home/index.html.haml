@@ -22,7 +22,7 @@
 						= f.password_field :password
 					- if devise_mapping.rememberable?
 						.col-sm-1.white
-							= f.submit "Sign in", :class => "btn btn-info"
+							= f.submit "Log in", :class => "btn btn-info"
 
 
 
@@ -40,7 +40,7 @@
 				.row.spacer
 					.col-sm-5
 					.col-sm-2
-						%btn.btn-outline-inverse.btn-lg{role: "button"} Sign up!
+						%a.btn.btn-outline-inverse.btn-lg{role: "button", :href => new_user_registration_url, :style => "color:white" } Sign Up!
 					.col-sm-5
 		
 

@@ -29,13 +29,13 @@
 			%a.navbar-brand{href: "#"} Art Genius
 		.navbar-collapse.collapse
 			.navbar-right
-				.glyphicon.glyphicon-star Star
+				.a= link_to "sign out", destroy_user_session_path, method: :delete, :class => "btn btn-info white"
 .container
 	.row.spacer
 		.col-sm-12
 			%h4= @image.title
-			%h5 Artist:
-			%h5 Year:
+			%h5 Artist: #{@image.artist}
+			%h5 Year: #{@image.year}
 			
 	.row.bottom-spacer
 		.col-sm-8
@@ -49,5 +49,5 @@
 				#side
 			.row
 				
-				%h4 Description:
+				%h4 Description: #{@image.description}
 				
