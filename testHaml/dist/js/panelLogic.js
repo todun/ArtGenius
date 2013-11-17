@@ -92,7 +92,12 @@ function drawing_mouseDownListener(e) {
     logic.isMousePressed = true;
     logic.x1 = e.getX();
     logic.y1 = e.getY();
-    logic.curRect = myPanel.createRectangle();
+    if (!logic.curRect) {
+    	logic.curRect = myPanel.createRectangle();
+    } else {
+    	logic.curRect.setWidth(0);
+    	logic.curRect.setHeight(0);
+    }
     addDrawingListenersToElement(logic.curRect);
     logic.curRect.setX(logic.x1);
     logic.curRect.setY(logic.y1);
@@ -127,16 +132,16 @@ function drawing_mouseUpListener(e) {
         logic.x2 = logic.x1 + logic.curRect.getWidth();
         logic.y2 = logic.y1 + logic.curRect.getHeight();
         logic.curRect.setFill(logic.placedFill); //change the fill when placed
-        logic.listOfRects.push(logic.curRect); //add to list of placed rects
-        setHighlightingMode(); //only drawing a single rect while in drawing mode. then switch back to highlighting mode
+        // logic.listOfRects.push(logic.curRect); //add to list of placed rects
+        // setHighlightingMode(); //only drawing a single rect while in drawing mode. then switch back to highlighting mode
 
         console.log(logic.x1);
         console.log(logic.y1);
         console.log(logic.x2);
         console.log(logic.y2);
-        var imageId = getImageId();
-        var redir = window.location.origin + "/comments/new?x1=" + logic.x1 + "&x2=" + logic.x2 + "&y1=" + logic.y1 + "&y2=" + logic.y2 + "&img=" + imageId;
-        $.get("/comments/new.js", function (data) {});
+        // var imageId = getImageId();
+        // var redir = window.location.origin + "/comments/new?x1=" + logic.x1 + "&x2=" + logic.x2 + "&y1=" + logic.y1 + "&y2=" + logic.y2 + "&img=" + imageId;
+        // $.get("/comments/new.js", function (data) {});
 
     }
     logic.isMousePressed = false;
