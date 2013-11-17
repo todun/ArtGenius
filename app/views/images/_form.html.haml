@@ -6,7 +6,16 @@
         - @image.errors.full_messages.each do |msg|
           %li= msg
 
-  = f.text_field :title
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :artist
+    = f.text_field :artist
+  .field
+    = f.label :year
+    = f.text_field :year
+  .field
   = f.file_field :image
   .actions
     = f.submit 'Save'

@@ -1,20 +1,15 @@
 :javascript 
 	$(document).ready(function(){
-		var image = document.getElementById("picture");
-		var height = image.height;
-		var comment = document.getElementById("comment");
-		comment.height = height/2 + "px";
-		
-		var link = document.getElementById("homeLink");
-		console.log(link);
-		link.onclick = "window.location.href='google.com'";
+		$('#homeLink').click(function() {
+			window.location.href = "#{root_url}";
+		});
 	});
 
 
 
 .navbar.navbar-inverse.navbar-fixed-top#blue-nav{role: "navigation"}
 	.container
-		.navbar-header#homeLink
+		.navbar-header#homeLink{:onclick => "function(){window.location.href='#{root_url}'};", :style =>  "display:block"}
 			%button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
 				%span.sr-only Toggle navigation
 				%span.icon-bar

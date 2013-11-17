@@ -13,7 +13,10 @@
 
 	})
 
-%p#notice= notice
+-# %p#notice= notice
+-# %h3= @image.title
+-# %p= @image.user.email
+-# %p= @image.comments.length
 
 .navbar.navbar-inverse.navbar-fixed-top#blue-nav{role: "navigation"}
 	.container
@@ -36,7 +39,11 @@
 			
 	.row.bottom-spacer
 		.col-sm-8
+<<<<<<< HEAD
 			
+=======
+			%button#modeButton{:type=>"button", :onclick => "javascript:toggleMode()"}Annotate
+>>>>>>> 08ccc4d5aa7f6318f459993334e2235bb5e724d1
 			#panel
 				%img#picture{:src => @image.image}
 		.col-sm-4.pad-left

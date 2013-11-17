@@ -15,6 +15,9 @@ var toggleMode = null; //is defined below
 
 $(document).ready(function () {
     var panelDiv = document.getElementById("panel");
+    if (!panelDiv) {
+    	return;
+    }
     var myPanel = new jsgl.Panel(panelDiv);
 
     var logic = {
@@ -30,13 +33,21 @@ $(document).ready(function () {
         placedFill: null,
         highlightedFill: null
     };
-    logic.drawingFill = new jsgl.fill.SolidFill();
-    logic.drawingFill.setOpacity(0.5);
-    logic.placedFill = new jsgl.fill.SolidFill();
-    logic.placedFill.setOpacity(0.3);
-    logic.highlightedFill = new jsgl.fill.SolidFill();
-    logic.highlightedFill.setOpacity(0.3);
-    logic.highlightedFill.setColor("yellow");
+	logic.drawingFill = new jsgl.fill.SolidFill();
+	logic.drawingFill.setOpacity(0.5);
+
+	logic.placedFill = new jsgl.fill.SolidFill();
+	logic.placedFill.setOpacity(0);
+
+	logic.placedStroke = new jsgl.stroke.SolidStroke();
+	logic.placedStroke.setOpacity(0);
+
+	logic.highlightedFill = new jsgl.fill.SolidFill();
+	logic.highlightedFill.setOpacity(0.2);
+	logic.highlightedFill.setColor("gray");
+
+	logic.highlightedStroke = new jsgl.stroke.SolidStroke();
+	logic.highlightedStroke.setOpacity(0);
 
     loadExistingRects();
 
@@ -53,6 +64,7 @@ $(document).ready(function () {
             obj.setHeight(comment.y2 - comment.y1);
             obj.id = comment.id;
             obj.setFill(logic.placedFill);
+            obj.setStroke(logic.placedStroke);
             logic.listOfRects.push(obj);
             myPanel.addElement(obj)
         }
@@ -109,18 +121,17 @@ $(document).ready(function () {
         elem.removeMouseOutListener(unhighlightedListener);
     }
 
-    function highlightedListener(e) {
-        var rect = e.getSourceElement();
-        rect.setFill(logic.highlightedFill);
-        var id = rect.id;
-        $.get("/comments/"+id+".js",function(data){
-        });
-    }
+	function highlightedListener(e) {
+	    var rect = e.getSourceElement();
+	    rect.setFill(logic.highlightedFill);
+	    rect.setStroke(logic.highlightedStroke);
+	}
 
-    function unhighlightedListener(e) {
-        var rect = e.getSourceElement();
-        rect.setFill(logic.placedFill);
-    }
+	function unhighlightedListener(e) {
+	    var rect = e.getSourceElement();
+	    rect.setFill(logic.placedFill);
+	    rect.setStroke(logic.placedStroke);
+	}
 
     function drawing_mouseDownListener(e) {
         logic.isMousePressed = true;
@@ -164,7 +175,10 @@ $(document).ready(function () {
             logic.y1 = logic.curRect.getY();
             logic.x2 = logic.x1 + logic.curRect.getWidth();
             logic.y2 = logic.y1 + logic.curRect.getHeight();
-            logic.curRect.setFill(logic.placedFill); //change the fill when placed
+
+            //WE CHOOSE NOT TO UPDATE THE FILL SO THE USER CAN STILL SEE WHERE THE REGION WAS PLACED AND CHANGE IT
+            // logic.curRect.setFill(logic.placedFill);
+            // logic.curRect.setStroke(logic.placedStroke);
 
             // logic.listOfRects.push(logic.curRect); //add to list of placed rects
             // setHighlightingMode(); //only drawing a single rect while in drawing mode. then switch back to highlighting mode

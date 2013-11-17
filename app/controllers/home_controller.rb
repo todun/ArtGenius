@@ -8,7 +8,6 @@ class HomeController < ApplicationController
     @resource = @resource ||= User.new
     if user_signed_in?
       render "discover.html.haml"
-    else 
     end
     @users = User.all
     @images = Image.all
