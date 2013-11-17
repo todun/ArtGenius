@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     #end
     @users = User.all
     @images = Image.all
-
+    @resource = @resource ||= User.new
     if user_signed_in?
       render "discover.html.haml"
     end
@@ -18,4 +18,5 @@ class HomeController < ApplicationController
       format.html { render :layout => "sessions" }
     end
   end
+
 end
