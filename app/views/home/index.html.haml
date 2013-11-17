@@ -1,5 +1,36 @@
-%h3 Home
-- @images.each do |image|
-  .col-sm-3.tile
-    %img{:src => image.image}
-= link_to "sign out", destroy_user_session_path, method: :delete
+%body.background
+
+.navbar.navbar-inverse.navbar-fixed-top{role: "navigation"}
+	.container
+		.navbar-header
+			%button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", type: "button"}
+				%span.sr-only Toggle navigation
+				%span.icon-bar
+				%span.icon-bar
+				%span.icon-bar
+		.navbar-collapse.collapse
+			%form.navbar-form.navbar-right
+				.form-group
+					%input.form-control{placeholder: "Email", type: "text"}/
+				.form-group
+					%input.form-control{placeholder: "Password", type: "password"}/
+				%button.btn.btn-success{type: "submit"} Sign in
+
+
+
+
+.jumbotron
+	.container.center
+		%h1#header-main Art Genius
+		
+		.container.spacer
+			%p An Art History lesson whenever you want
+			.row.spacer
+				.col-sm-4
+				.col-sm-2
+					%a.btn.btn-outline-inverse.btn-lg{role: "button"} Sign Up!
+				.col-sm-2
+					%a.btn.btn-outline-inverse.btn-lg{role: "button"} Log In!
+				.col-sm-4
+		
+
