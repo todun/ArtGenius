@@ -64,6 +64,7 @@ $(document).ready(function () {
             obj.setHeight(comment.y2 - comment.y1);
             obj.id = comment.id;
             obj.setFill(logic.placedFill);
+            obj.setStroke(logic.placedStroke);
             logic.listOfRects.push(obj);
             myPanel.addElement(obj)
         }
