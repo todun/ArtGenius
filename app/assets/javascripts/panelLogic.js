@@ -15,6 +15,9 @@ var toggleMode = null; //is defined below
 
 $(document).ready(function () {
     var panelDiv = document.getElementById("panel");
+    if (!panelDiv) {
+    	return;
+    }
     var myPanel = new jsgl.Panel(panelDiv);
 
     var logic = {
